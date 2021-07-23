@@ -1,6 +1,33 @@
 extends ./layout/index 
 
+block slider
+    .slider
+        h1 Rio de Janeiro
+        em Sol y Playa
+
 block contenido
     main.container.mt-5
-        h1.mt-5.text-center #{pagina}
-        .row 
+        h2.text-center.mb-5 Sobre Nosotros
+        .row.mb-5
+            .col-md-6
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque nisl a semper vulputate. Integer eleifend a augue id finibus. Proin viverra nisi nibh, at eleifend lorem rhoncus consectetur. Sed vel maximus urna, feugiat varius arcu. 
+                p Sed sed purus et felis dapibus imperdiet. Praesent ultricies ligula ut dui aliquet efficitur. Duis nec lectus quis sem eleifend commodo quis luctus enim. Nam lobortis metus et velit finibus, vel lacinia purus bibendum. Sed lobortis, lorem ac vestibulum iaculis, elit tellus porta diam, blandit posuere ante felis in elit. 
+            .col-md-6
+                img(src="/img/inicio_nosotros.jpg", alt="imagen nosotros", class="img-fluid")
+
+        include ./layout/bloque_viajes
+
+    .descuento
+        .container
+            .row
+                .col-md-6
+                    .contenido
+                        h3 5% de descuento
+                        p.titulo Viaje a Canada
+                        p.fecha 20 de Marzo de 2022 - 28 de Marzo de 2022
+                        p.precio Desde $ 143.877 pesos
+
+    .container
+        h2.mt-5.text-center Testimoniales
+
+        include ./layout/bloque_testimoniales

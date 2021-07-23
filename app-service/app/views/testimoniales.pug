@@ -3,10 +3,13 @@ extends ./layout/index
 block contenido
     main.container.mt-5
         h1.mt-5.text-center #{pagina}
-        .row 
 
+        blockquote.text-center.m-3 Lee sobre nuestros clientes y sus experiencias
+        include ./layout/bloque_testimoniales
+
+        .row
             .col-md-12
-                h2.d-block.w-100.text-center Agrega un Testimonial
+                h2.d-block.w-100.text-center.mt-4 Agrega un Testimonial
 
             .col.row.justify-content-center
                 .col-md-8 

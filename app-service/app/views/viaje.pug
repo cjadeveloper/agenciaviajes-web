@@ -16,8 +16,10 @@ block contenido
                         line(x1='4' y1='11' x2='20' y2='11')
                         rect(x='8' y='15' width='2' height='2')
 
-                    -let fechaIda = new Date(viaje.fecha_ida).toLocaleDateString('es-AR');
-                    -let fechaVuelta = new Date(viaje.fecha_vuelta).toLocaleDateString('es-AR');
+                    //- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+                    -let options = { year: 'numeric', month: '2-digit', day: 'numeric' };
+                    -let fechaIda = new Date(viaje.fecha_ida).toLocaleDateString('es-AR', options);
+                    -let fechaVuelta = new Date(viaje.fecha_vuelta).toLocaleDateString('es-AR', options);
                 
                     |  #{fechaIda} al #{fechaVuelta}
                 
