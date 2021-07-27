@@ -9,10 +9,6 @@ db.authenticate()
     .then( () => console.log('Base de Datos Conectada') )
     .catch( error => console.log(error) );
 
-
-// Definir un puerto
-const port = process.env.PORT || 3000
-
 // Habilito Pug
 app.set('view engine', 'pug');
 
@@ -37,6 +33,9 @@ app.use(express.static('public'));
 // Agrega Router
 app.use('/', router);
 
+// Puerto y Host para la app.
+const port = process.env.PORT || 3000
+
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Express server is running on port ${port}`)
 })
