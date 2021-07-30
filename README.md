@@ -11,8 +11,9 @@
 - [MySQL](https://www.mysql.com/): Como DB para el Backend.
 - [Sequelize](https://sequelize.org/): Como ORM de Node nuestra DB MySQL (También soporta Postgres, SQLite, Microsoft SQL Server, y otros).
 - [Docker-Compose](https://docs.docker.com/compose/): Para unir y simplificar los distintos servicios (contenedores [Docker](https://www.docker.com/)) relacionados: App de viajes en Node y su DB en MySQL.
+- [Heroku](https://www.heroku.com/)
 
-## Uso Básico
+## Uso Básico Local
 
 Para iniciar, se necesita tener instalado Docker, luego...
 
@@ -49,7 +50,7 @@ docker-compose ps
 Ejecutar el contenedor individual de Node, el de la app, en modo interactivo, mediante...
 
 ```sh
-$ docker exec -it agencia-viajes_app_1 bash
+$ docker exec -it agencia-viajes_web_1 bash
 root@c5a2605be3fd:/#
 ```
 
@@ -92,4 +93,45 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
+```
+
+## Deployment en Heroku
+
+Hay distintos métodos para hacer el deploy con Heroku: Heroku Git, Heroku GitHub y Container Registry.
+
+Como queremos hacerlo desde un contenedor Docker, seguimos las [guía](https://devcenter.heroku.com/articles/local-development-with-docker-compose) de Heroku para hacer el deploy con [Heroku container registry](https://devcenter.heroku.com/articles/container-registry-and-runtime) desde nuestro archivo Docker-Compose.
+
+> Importante 1: Nuestra aplicación de Node depende de un servicio con una base de datos MySQL, la cual no puede ser enviada a Heroku. En lugar de ello, debemos agregar el servicio como un agregado (add-on) en el mismo Heroku y configurarlo allí.
+>
+>Importante 2: Nuestro servicio de aplicación se debe llamar "web" en nuestro archivo docker-compose porque sino Heroku no lo podrá enlazar.
+
+Loguearse en Container Registry
+
+```console
+heroku container:login
+```
+
+Crear la app (con nombre si se quiere)
+
+```console
+heroku create <app-name>
+```
+
+Para enviar una imagen a Heroku, como una extraída de Docker Hub, la etiquetamos y la empujamos de acuerdo con esta plantilla de nomenclatura:
+
+```console
+docker tag <image> registry.heroku.com/<app>/<process-type>
+docker push registry.heroku.com/<app>/<process-type>
+```
+
+Para nuestro caso:
+
+- image: agencia-viajes_web
+- app: cjadeveloper-agencia-viajes
+- process-type: web
+
+Luego de eso, hacemos
+
+```console
+heroku container:release web -a cjadeveloper-agencia-viajes
 ```

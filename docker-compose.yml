@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    app:
+    web:
         env_file: ./app-service/.env
         build: ./app-service
         ports:

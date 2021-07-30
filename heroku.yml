@@ -1,4 +1,0 @@
-build:
-  docker:
-    web:  ./app-service/Dockerfile
-
